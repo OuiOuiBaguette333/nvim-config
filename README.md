@@ -1,5 +1,5 @@
 # nvim-config
-nvim config
+My neovim configurations for c++ competitive programming, it is based off: https://github.com/arthursun2005/nvim-config
 
 To use, run the following commands:
 ```
