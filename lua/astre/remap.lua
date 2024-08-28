@@ -5,7 +5,7 @@ vim.keymap.set("n", "<c-b>", ":b#<cr>")
 vim.keymap.set("n", "yyy", "gg\"+yG")
 vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<cr>")
 vim.keymap.set("n", "<leader>p", ":CompetiTest receive problem<cr>")
-vim.keymap.set("n", "pp", ":CompetiTest run<cr>")
+vim.keymap.set("n", "ll", ":CompetiTest run<cr>")
 
 vim.keymap.set({'n', 't'}, "<c-\\>", "<cmd>ToggleTerm direction=float<cr>")
 
@@ -15,7 +15,7 @@ vim.keymap.set("n", "<leader>w", ":UndotreeToggle<cr>")
 vim.api.nvim_create_autocmd("FileType", {
         pattern = {'cpp'},
         callback = function(args)
-                vim.keymap.set("n", "<leader>c", ":up<cr>:!g++ -O2 -std=gnu++20 -DDEBUG -DLOCAL -Wall -Wextra -Wshadow \"%\" -o \"%:r\"<cr>", { buffer = args.buf })
+                vim.keymap.set("n", "<leader>c", ":up<cr>:!g++ -std=gnu++20 -DDEBUG -DLOCAL -g -Og -Wall -Wextra -Wshadow -Wno-unused-variable -fsanitize=undefined -fno-sanitize-recover -fstack-protector \"%\" -o \"%:r\"<cr>", { buffer = args.buf })
         end
 })
 
@@ -33,6 +33,12 @@ augroup FileTypeCPP
 augroup END
 ]], true)
 
+vim.api.nvim_exec([[
+augroup FileTypePython
+        autocmd!
+        autocmd FileType python nnoremap <buffer> <leader><leader> :term python3 <C-r>=expand('%:p')<CR><CR>
+augroup END
+]], true)
 
 vim.api.nvim_set_keymap(
         "n",
